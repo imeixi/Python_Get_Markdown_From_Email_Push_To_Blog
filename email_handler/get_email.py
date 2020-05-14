@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import sys
+import os
 import poplib
 import smtplib
 import email.utils
@@ -200,10 +201,12 @@ class OperateEmail:
                 content = ''
                 attachment_files = []
                 if msg_headers['subject'].__contains__('time'):
-                    base_save_path = './time_diary/'
+                    base_save_path = os.path.abspath('./time_diary/')
+                    print(base_save_path)
                     content, attachment_files = OperateEmail.get_email_content(msg, base_save_path)
                 elif msg_headers['subject'].__contains__('imeixi'):
-                    base_save_path = './imeixi/'
+                    base_save_path = os.path.abspath('./imeixi/')
+                    print(base_save_path)
                     content, attachment_files = OperateEmail.get_email_content(msg, base_save_path)
                 else:
                     print('No new mail recently')

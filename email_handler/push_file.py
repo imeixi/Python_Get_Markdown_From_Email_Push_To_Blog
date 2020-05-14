@@ -30,7 +30,7 @@ def push_file(url, tokens, fn):
     data = {
         "message": "my commit message",
         "committer": {
-            "name": "imeixi",
+            "name": "email_imeixi",
             "email": "zheng.ah.r@gmail.com"
         },
         "content": file_base64(fn),
@@ -56,7 +56,7 @@ if __name__ == '__main__':
     elif len(sys.argv) == 2:
         token = sys.argv[1]
 
-    imeixi_dir = './imeixi'
+    imeixi_dir = 'email_imeixi'
     for root, dirs, files in os.walk(imeixi_dir, topdown=True):
         for name in files:
             url_imeixi = 'https://api.github.com/repos/imeixi/blog/contents/source/_posts/' + name
@@ -66,7 +66,7 @@ if __name__ == '__main__':
         for name in dirs:
             print(os.path.join(root, name))
 
-    time_diary_dir = './time_diary'
+    time_diary_dir = 'email_timediary'
     for root, dirs, files in os.walk(time_diary_dir, topdown=False):
         for name in files:
             url_time_diary = 'https://api.github.com/repos/imeixi/timediary/contents/source/_posts/' + name

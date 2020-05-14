@@ -22,7 +22,7 @@ class OperateEmail:
         self.pop3_server = 'pop.163.com'
         self.smtp_server = 'smtp.163.com'
         self.imap_server = 'imap.163.com'
-        self.email = 'imeixi@163.com'
+        self.email = 'email_imeixi@163.com'
 
     def send_mail_by_smtp(self):
         _from = self.email
@@ -139,7 +139,7 @@ class OperateEmail:
                     print('-'*80)
                     # filename = filename.encode("utf-8")
                 data = part.get_payload(decode=True)
-                att_file = open(str(base_save_path) + str(filename), 'wb')
+                att_file = open(os.path.join(base_save_path, filename), 'wb')
                 attachment_files.append(filename)
                 att_file.write(data)
                 att_file.close()
@@ -201,11 +201,11 @@ class OperateEmail:
                 content = ''
                 attachment_files = []
                 if msg_headers['subject'].__contains__('time'):
-                    base_save_path = os.path.abspath('./time_diary/')
+                    base_save_path = os.path.abspath('email_timediary')
                     print(base_save_path)
                     content, attachment_files = OperateEmail.get_email_content(msg, base_save_path)
                 elif msg_headers['subject'].__contains__('imeixi'):
-                    base_save_path = os.path.abspath('./imeixi/')
+                    base_save_path = os.path.abspath('email_imeixi')
                     print(base_save_path)
                     content, attachment_files = OperateEmail.get_email_content(msg, base_save_path)
                 else:

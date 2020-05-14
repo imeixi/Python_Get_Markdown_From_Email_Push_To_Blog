@@ -20,7 +20,7 @@ class EmailHandler():
         self.pop3_server = 'pop.163.com'
         self.smtp_server = 'smtp.163.com'
         self.imap_server = 'imap.163.com'
-        self.email = 'imeixi@163.com'
+        self.email = 'email_imeixi@163.com'
 
     def sending_from_file(self, text_file):
         # Open the plain text file whose name is in textfile for reading.
@@ -62,8 +62,8 @@ class EmailHandler():
     def parser_header_from_text(self):
         #  Or for parsing headers in a string (this is an uncommon operation), use:
         headers = Parser(policy=default).parsestr(
-            'From: IMEIXI <imeixi@163.com>\n'
-            'To: <imeixi@163.com>\n'
+            'From: IMEIXI <email_imeixi@163.com>\n'
+            'To: <email_imeixi@163.com>\n'
             'Subject: Test message\n'
             '\n'
             'Body would go here\n')

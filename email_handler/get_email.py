@@ -224,11 +224,15 @@ class OperateEmail:
 
 if __name__ == '__main__':
     # 命令行输入三个参数，第1个参数 sys.argv[0] 是脚本名称，第2个是邮箱用户名，第3个是邮箱密码
-    while len(sys.argv) != 3:
-        print('please input email username and password. ')
-
-    user = sys.argv[1]
-    pw = sys.argv[2]
+    if len(sys.argv) < 2:
+        user = input('please input email username: ')
+        pw = input('please input email password: ')
+    elif len(sys.argv) < 3:
+        user = sys.argv[1]
+        pw = input('please input email password: ')
+    else:
+        user = sys.argv[1]
+        pw = sys.argv[2]
     operate_email = OperateEmail(user, pw)
     # operate_email.send_mail_by_smtp()
     operate_email.rec_email_by_pop3()

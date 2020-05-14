@@ -84,6 +84,5 @@ if __name__ == '__main__':
                 f.write(line + '\n')
             print('-' * 40 + 'Write ' + key + 'Done' + '-' * 40 + '\n')
             time.sleep(5)
-
-
+    email_handler
 

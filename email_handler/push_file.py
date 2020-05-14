@@ -42,6 +42,8 @@ def push_file(url, tokens, fn):
     res = requests.put(url, data=json.dumps(data), headers=headers)
     if res.status_code == 201:
         print('success')
+        print('response code: ' + str(res.status_code))
+        print('response message: ' + str(res.text))
     else:
         print('response code: ' + str(res.status_code))
         print('response message: ' + str(res.text))

@@ -97,7 +97,7 @@ if __name__ == '__main__':
         pw = sys.argv[2]
 
     email = EmailHandler(user, pw)
-    # email.sending_from_file('testfile')
-    email.parser_header_from_file('header')
+    # email.sending_from_file('./source/testfile')
+    email.parser_header_from_file('./source/header')
 
 

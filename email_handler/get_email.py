@@ -201,11 +201,11 @@ class OperateEmail:
                 content = ''
                 attachment_files = []
                 if msg_headers['subject'].__contains__('time'):
-                    base_save_path = os.path.abspath('email_timediary')
+                    base_save_path = os.path.abspath('./email_timediary')
                     print(base_save_path)
                     content, attachment_files = OperateEmail.get_email_content(msg, base_save_path)
                 elif msg_headers['subject'].__contains__('imeixi'):
-                    base_save_path = os.path.abspath('email_imeixi')
+                    base_save_path = os.path.abspath('./email_imeixi')
                     print(base_save_path)
                     content, attachment_files = OperateEmail.get_email_content(msg, base_save_path)
                 else:

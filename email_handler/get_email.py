@@ -103,8 +103,6 @@ class OperateEmail:
                 else:
                     # 需要解码Email地址:
                     hdr, address = parseaddr(value)
-                    print(hdr)
-                    print(address)
                     name = OperateEmail.decode_str(hdr)
                     value = u'%s <%s>' % (name, address)
                     if header == 'From':
@@ -131,13 +129,13 @@ class OperateEmail:
                 # Decode filename
                 h = Header(file_name)
                 dh = decode_header(h)
-                print(dh)
                 filename = dh[0][0]
                 if dh[0][1]:  # 如果包含编码的格式，则按照该格式解码
                     # filename = filename.decode(dh[0][1])
-                    filename = OperateEmail.decode_str(str(filename, dh[0][1])) #将附件名称可读化
+                    # 将附件名称可读化
+                    filename = OperateEmail.decode_str(str(filename, dh[0][1]))
                     print(filename)
-                    print('_'*80)
+                    print('-'*80)
                     # filename = filename.encode("utf-8")
                 data = part.get_payload(decode=True)
                 att_file = open(str(base_save_path) + str(filename), 'wb')
@@ -190,28 +188,27 @@ class OperateEmail:
                 # 把邮件内容解析为Message对象：
                 msg = Parser().parsestr(msg_content)
 
-                print(msg.get('From'))
-                print(msg.get('To'))
-                print(msg.get('Subject'))
-
                 # 但是这个Message对象本身可能是一个MIMEMultipart对象，即包含嵌套的其他MIMEBase对象，
                 # 嵌套可能还不止一层。所以我们要递归地打印出Message对象的层次结构：
                 print('---------- 解析之后 ----------')
                 msg_headers = OperateEmail.get_email_headers(msg)
-                if msg_headers['subject'].__contains__('日记'):
+                print('subject:', msg_headers['subject'])
+                print('from_address:', msg_headers['from'])
+                print('to_address:', msg_headers['to'])
+                print('date:', msg_headers['date'])
+
+                content = ''
+                attachment_files = []
+                if msg_headers['subject'].__contains__('time'):
                     base_save_path = './time_diary/'
                     content, attachment_files = OperateEmail.get_email_content(msg, base_save_path)
                 elif msg_headers['subject'].__contains__('imeixi'):
                     base_save_path = './imeixi/'
                     content, attachment_files = OperateEmail.get_email_content(msg, base_save_path)
                 else:
-                    pass
+                    print('No new mail recently')
 
-                print('subject:', msg_headers['subject'])
-                print('from_address:', msg_headers['from'])
-                print('to_address:', msg_headers['to'])
-                print('date:', msg_headers['date'])
-                # print('content:', content)
+                print('content:', content)
                 print('attachment_files: ', attachment_files)
 
             # 可以根据邮件索引号直接从服务器删除邮件:

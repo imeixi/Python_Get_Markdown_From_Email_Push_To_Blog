@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-import sys
 import os
 import poplib
 import smtplib
@@ -154,7 +153,7 @@ class OperateEmail:
                 content = data
         return content, attachment_files
 
-    def rec_email_by_pop3(self):
+    def rec_email_by_pop3(self, imeixi_dir, time_diary_dir):
         print('Connecting...')
         # 连接pop3服务器  # 身份认证
         server = poplib.POP3(self.pop3_server)
@@ -201,11 +200,11 @@ class OperateEmail:
                 content = ''
                 attachment_files = []
                 if msg_headers['subject'].__contains__('time'):
-                    base_save_path = os.path.abspath('./email_timediary')
+                    base_save_path = os.path.abspath(time_diary_dir)
                     print(base_save_path)
                     content, attachment_files = OperateEmail.get_email_content(msg, base_save_path)
                 elif msg_headers['subject'].__contains__('imeixi'):
-                    base_save_path = os.path.abspath('./email_imeixi')
+                    base_save_path = os.path.abspath(imeixi_dir)
                     print(base_save_path)
                     content, attachment_files = OperateEmail.get_email_content(msg, base_save_path)
                 else:
@@ -221,19 +220,3 @@ class OperateEmail:
             # 关闭连接:
             server.quit()
 
-
-if __name__ == '__main__':
-    # 命令行输入三个参数，第1个参数 sys.argv[0] 是脚本名称，第2个是邮箱用户名，第3个是邮箱密码
-    if len(sys.argv) < 2:
-        user = input('please input email username: ')
-        pw = input('please input email password: ')
-    elif len(sys.argv) < 3:
-        user = sys.argv[1]
-        pw = input('please input email password: ')
-    else:
-        user = sys.argv[1]
-        pw = sys.argv[2]
-    operate_email = OperateEmail(user, pw)
-    # operate_email.send_mail_by_smtp()
-    operate_email.rec_email_by_pop3()
-    # operate_email.send_mail_by_message()

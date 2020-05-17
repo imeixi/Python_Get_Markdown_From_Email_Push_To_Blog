@@ -25,16 +25,12 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    - name: Run get_email
+    - name: Run get_email and push file to Github Pages
       env:
         EMAIL_USER: ${{ secrets.EMAIL_USER}}
-        EMAIL_PW: ${{ secrets.EMAIL_PW}} 
+        EMAIL_PW: ${{ secrets.EMAIL_PW}}
+        TOKEN: ${{ secrets.TOKEN}}
       
       run: |
-        python ./email_handler/get_email.py $EMAIL_USER $EMAIL_PW
-        
-    - name: Run push file to  Github Pages
-      env:
-        TOKEN: ${{ secrets.TOKEN}}  
-      run: |
-        python ./email_handler/push_file.py $TOKEN
+        python update_blog.py $EMAIL_USER $EMAIL_PW $TOKEN
+

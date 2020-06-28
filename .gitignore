@@ -9,3 +9,4 @@ email_handler/.idea/workspace.xml
 .idea/misc.xml
 .idea/python-scripts.iml
 .idea/workspace.xml
+*.pyc

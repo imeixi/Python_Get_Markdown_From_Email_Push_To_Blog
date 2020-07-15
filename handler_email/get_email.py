@@ -21,6 +21,7 @@ class OperateEmail:
         self.pop3_server = 'pop.163.com'
         self.smtp_server = 'smtp.163.com'
         self.imap_server = 'imap.163.com'
+        # send message from self.email
         self.email = 'email_imeixi@163.com'
 
     def send_mail_by_smtp(self):
